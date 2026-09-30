@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kamrul Islam Kamran — Portfolio</title>
+<meta name="description" content="Portfolio of Kamrul Islam Kamran — Computer Science at BRAC University, Head of IT at Royal Asia Trade Line, data science & AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#fbfbd2;
+    --cream-2:#f7f6cc;
+    --ink:#141210;
+    --teal:#3f8a9c;
+    --teal-ink:#f4f7e8;
+    --line:#141210;
+    --paper:#c9c5b3;
+    --serif:"Young Serif", Georgia, serif;
+    --sans:"Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  /* ---------- top nav ---------- */
+  .topnav{position:fixed;inset:0 0 auto 0;height:62px;z-index:20;background:var(--cream);border-bottom:1px solid var(--line)}
+  .nav{display:flex;justify-content:space-between;align-items:center;height:100%;padding:0 clamp(12px,3.5vw,28px);font-family:var(--mono);font-size:clamp(12px,1.35vw,15px)}
+  .nav a{text-decoration:none;padding:7px 10px;border-radius:5px;white-space:nowrap}
+  .nav a:hover{background:rgba(20,18,16,.08)}
+  .nav a.active{background:var(--ink);color:var(--cream)}
+
+  /* ---------- ticker ---------- */
+  .ticker{position:fixed;top:62px;left:0;right:0;height:62px;z-index:5;overflow:hidden;background:var(--cream);display:flex;align-items:center}
+  .ticker-track{display:flex;align-items:center;gap:0;white-space:nowrap;animation:marquee 38s linear infinite;will-change:transform}
+  .ticker-item{display:flex;align-items:center;font-size:clamp(14px,1.55vw,16.5px);font-weight:500}
+  .ticker-item span{padding:0 clamp(20px,4vw,40px)}
+  .ticker-item svg{width:22px;height:22px;flex:none}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* ---------- pinned hero ---------- */
+  .stage{position:relative}
+  .hero{position:sticky;top:0;height:100vh;height:100svh;z-index:1;overflow:hidden;pointer-events:none}
+  .hero-intro{position:absolute;left:50%;bottom:calc(16vw + 64px);transform:translateX(-50%);width:min(420px,86vw);text-align:center;font-size:clamp(15px,1.6vw,17px);line-height:1.12;font-weight:500;pointer-events:auto}
+  .hero-intro a{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  .hero-intro a.pill{text-decoration:none;border:1px solid var(--ink);border-radius:999px;padding:0 5px}
+  .hero-intro a:hover{color:var(--teal)}
+  .hero-word{position:absolute;left:0;right:0;bottom:-3.6vw;text-align:center;font-family:var(--serif);font-weight:400;font-size:20.6vw;line-height:1;letter-spacing:-.02em;white-space:nowrap}
+
+  /* ---------- cards ---------- */
+  .cards{position:relative;z-index:30;margin-top:0;padding:0 16px 22vh;display:flex;flex-direction:column;align-items:center;gap:clamp(40px,7vh,70px);pointer-events:none}
+  .card{pointer-events:auto;width:min(334px,84vw);background:var(--cream-2);box-shadow:3px 5px 10px rgba(20,18,16,.28);text-align:center;transform:rotate(var(--r,0deg));transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+  .card:hover{transform:rotate(0deg) scale(1.02)}
+  .card-media{aspect-ratio:1/1.1;overflow:hidden;background:#000}
+  .card-media img{width:100%;height:100%;object-fit:cover}
+  .card-media svg{width:100%;height:100%;display:block}
+  .card-body{padding:14px 14px 16px;border-top:1px solid rgba(20,18,16,.15)}
+  .card h3{font-family:var(--sans);font-weight:500;font-size:15px;letter-spacing:.01em;text-transform:uppercase;line-height:1.15}
+  .card p{font-size:14.5px;line-height:1.1;margin:8px auto 0;max-width:290px}
+  .tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:13px}
+  .tag{font-size:14px;border:1px solid var(--ink);border-radius:6px;padding:3px 8px;box-shadow:0 1px 0 rgba(20,18,16,.35)}
+
+  .invite{padding:0;text-align:left}
+  .invite .inner{padding:30px 22px 22px}
+  .invite h3{font-family:var(--serif);text-transform:none;font-size:22px;letter-spacing:0}
+  .invite .sub{margin:12px 0 0;font-size:14px}
+  .invite p{max-width:none;margin:14px 0 0;font-size:14.5px;line-height:1.14}
+  .invite .cta{text-align:center;margin-top:22px}
+  .invite .reserve{border-top:1px solid var(--ink);text-align:center;padding:12px 10px 13px;font-size:14.5px;text-transform:uppercase}
+  .btn{display:inline-block;background:var(--teal);color:var(--teal-ink);font-family:var(--sans);font-size:15px;padding:12px 20px;border-radius:50%;text-decoration:none;transition:transform .2s, background .2s}
+  .btn:hover{background:#2f7485;transform:scale(1.05)}
+
+  /* ---------- testimonial / about ---------- */
+  .after{position:relative;z-index:40;background:var(--cream);border-top:1px solid var(--line);padding:18px 18px 18px}
+  .wood{position:relative;padding:0 0 0;background:#6b3f22;border-top:1px solid var(--line);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.09' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 0.26 0 0 0 0 0.13 0 0 0 0 0.05 0 0 0 1.1 -0.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"),
+      linear-gradient(90deg,#7a4a28,#5d341b 30%,#83532f 55%,#5a321a 80%,#76452a);
+    background-size:600px 300px, cover}
+  .stadium{position:relative;margin:0 auto;background:var(--cream);border-radius:min(170px,22vw)/min(170px,22vw);padding:36px clamp(52px,8vw,96px) 62px;min-height:320px;text-align:center}
+  .avatar{width:76px;height:76px;border-radius:50%;overflow:hidden;margin:0 auto 26px;border:1px solid rgba(20,18,16,.2)}
+  .avatar img{width:100%;height:100%;object-fit:cover}
+  .quote{font-family:var(--mono);font-size:clamp(12.5px,1.45vw,14.5px);line-height:1.3;text-align:left;max-width:585px;margin:0 auto;min-height:150px}
+  .quote .who{margin-top:16px}
+  .quote em{font-style:italic}
+  .slide{display:none}
+  .slide.fx{animation:fade .45s ease}
+  .slide.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .pn{position:absolute;top:50%;transform:translateY(-10%);font-family:var(--mono);font-size:13px;line-height:1;width:2.2ch;word-break:break-all;text-align:left}
+  .pn:hover{color:var(--teal)}
+  .pn.prev{left:clamp(14px,2.5vw,26px)}
+  .pn.next{right:clamp(14px,2.5vw,26px)}
+  .tabs{position:absolute;left:50%;bottom:0;transform:translateX(-50%);display:flex}
+  .tabs button{width:clamp(44px,12.7vw,92px);height:19px;border:1px solid rgba(20,18,16,.3);border-bottom:0;margin-left:-1px;background:var(--cream);font-family:var(--sans);font-size:14px;line-height:17px}
+  .tabs button.on{background:var(--ink);color:var(--cream)}
+
+  /* ---------- contact form ---------- */
+  .paper{margin-top:18px;padding:18px 20px 30px;font-family:var(--mono);font-size:clamp(12.5px,1.45vw,14px);box-shadow:3px 4px 6px rgba(20,18,16,.25);
+    background-color:var(--paper);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.28 0 0 0 0 0.24 0 0 0 0.9 -0.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E")}
+  .paper label{display:block}
+  .paper textarea,.paper input{width:100%;background:transparent;border:0;border-bottom:1px solid var(--ink);font:inherit;color:inherit;outline:none;padding:6px 0}
+  .paper textarea{height:112px;resize:vertical;margin-top:4px}
+  .paper input::placeholder,.paper textarea::placeholder{color:rgba(20,18,16,.75)}
+  .paper input:focus,.paper textarea:focus{border-bottom-width:2px}
+  .budget-q{margin-top:22px}
+  .budget{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:9px}
+  .budget button{border:1px solid rgba(20,18,16,.6);border-radius:4px;padding:3px 4px;font-family:var(--mono);font-size:inherit;box-shadow:0 1px 1px rgba(20,18,16,.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .budget button:hover{background:rgba(255,255,255,.2)}
+  .budget button.on{background:var(--ink);color:var(--paper)}
+  .field{margin-top:20px}
+  .sender{width:76px;height:88px;margin:28px auto 0;border:1px solid var(--ink);overflow:hidden}
+  .sender img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+  .send{text-align:center;margin-top:14px}
+  .send .btn{padding:13px 24px}
+  .sent{display:none;text-align:center;margin-top:12px}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:18px;border:1px solid var(--line)}
+  footer .nav{height:44px;padding:0 6px;border-bottom:1px solid var(--line)}
+  .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 14px;padding:3px 14px 2px;font-family:var(--mono);font-size:clamp(12px,1.35vw,14px)}
+  .legal a{text-decoration:none}
+  .legal a:hover{text-decoration:underline}
+
+  /* ---------- olive ---------- */
+  .olive{position:fixed;right:-6px;bottom:-4px;width:40px;z-index:60;transition:transform .3s}
+  .olive:hover{transform:rotate(-18deg) translateY(-4px)}
+
+  @media (max-width:620px){
+    .topnav{height:52px}
+    .nav{justify-content:flex-start;gap:4px;overflow-x:auto;scrollbar-width:none}
+    .nav::-webkit-scrollbar{display:none}
+    .ticker{top:52px;height:50px}
+    .hero-word{font-size:20.6vw;bottom:-3.6vw}
+    .hero-intro{bottom:calc(16vw + 40px)}
+    .stadium{border-radius:60px;padding:26px 40px 50px}
+    .pn{font-size:11px}
+    .budget{grid-template-columns:repeat(2,1fr)}
+    footer .nav{justify-content:flex-start}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ticker-track{animation:none}
+    .card,.btn,.olive{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <nav class="nav" aria-label="Primary">
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#work">Experience</a>
+    <a href="#work">Projects</a>
+    <a href="#top" class="active">Portfolio</a>
+    <a href="#skills-tab" data-go="3">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<main id="top">
+  <section class="stage">
+    <div class="hero">
+      <p class="hero-intro">
+        Welcome to my curated collection of projects, roles and learning that I can't get
+        <a href="#work">enough of.</a> Click through, read up on the results—and
+        <a href="#contact" class="pill">let's connect</a>? I'd be delighted.
+      </p>
+      <h1 class="hero-word">Portfolio</h1>
+    </div>
+
+    <div class="cards" id="work">
+      <!-- 1 -->
+      <article class="card" style="--r:2deg">
+        <div class="card-media"><img src="assets/formal.jpg" alt="Kamran in a navy suit" style="object-position:50% 22%"></div>
+        <div class="card-body">
+          <h3>Royal Asia Trade Line • Head of IT</h3>
+          <p>Building a trading company's first online presence — now bringing in partners from Europe and Malaysia.</p>
+          <div class="tags"><span class="tag">Web design</span><span class="tag">Web build</span><span class="tag">IT systems</span></div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="card" style="--r:-2.5deg">
+        <div class="card-media">
+          <svg viewBox="0 0 330 363" role="img" aria-label="Decision tree illustration">
+            <rect width="330" height="363" fill="#0b0b0b"/>
+            <rect x="80" y="26" width="170" height="150" fill="#1b1b1b" stroke="#e8e2d0" stroke-width="1.5" stroke-dasharray="1.5 3"/>
+            <g stroke="#e8e2d0" stroke-width="2.2" fill="none">
+              <path d="M165 60 L125 105 M165 60 L205 105 M125 105 L105 145 M125 105 L145 145 M205 105 L225 145"/>
+            </g>
+            <g fill="#f3ead8" stroke="#c8636a" stroke-width="2">
+              <circle cx="165" cy="58" r="11"/><circle cx="125" cy="105" r="9"/><circle cx="205" cy="105" r="9"/>
+            </g>
+            <g fill="#c8414d"><rect x="97" y="140" width="16" height="16" rx="2"/><rect x="137" y="140" width="16" height="16" rx="2"/><rect x="217" y="140" width="16" height="16" rx="2"/></g>
+            <rect x="80" y="190" width="170" height="150" fill="#c4434b" stroke="#2a0d0f" stroke-width="1.5" stroke-dasharray="1.5 3"/>
+            <text x="165" y="222" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="14" fill="#2a0d0f">Burnout? Anxiety?</text>
+            <text x="165" y="240" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="12" fill="#2a0d0f">let the data decide</text>
+            <g fill="#2a0d0f"><rect x="110" y="300" width="14" height="22"/><rect x="130" y="282" width="14" height="40"/><rect x="150" y="270" width="14" height="52"/><rect x="170" y="290" width="14" height="32"/><rect x="190" y="262" width="14" height="60"/><rect x="210" y="295" width="14" height="27"/></g>
+            <line x1="102" y1="322" x2="232" y2="322" stroke="#2a0d0f" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>BRAC University • Machine Learning</h3>
+          <p>Predicting burnout and exam anxiety from 50,000 records of student GenAI use.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">EDA</span><span class="tag">Tree-based classifiers</span></div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="card" style="--r:3deg">
+        <div class="card-media"><img src="assets/casual.jpg" alt="Kamran smiling in a beige jacket and cap" style="object-position:50% 30%"></div>
+        <div class="card-body">
+          <h3>Capstone (CSE400) • Wi-Fi Sensing</h3>
+          <p>A Wi-Fi signal-based detection system, designed so new detection features can be added on demand.</p>
+          <div class="tags"><span class="tag">Final-year project</span><span class="tag">In progress</span></div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card" style="--r:-1.5deg">
+        <div class="card-media">
+          <svg viewBox="0 0 330 363" role="img" aria-label="Rising sun with data points illustration">
+            <defs>
+              <radialGradient id="glow" cx="50%" cy="45%" r="65%"><stop offset="0" stop-color="#f6a13a"/><stop offset=".55" stop-color="#d7561f"/><stop offset="1" stop-color="#4a1406"/></radialGradient>
+            </defs>
+            <rect width="330" height="363" fill="url(#glow)"/>
+            <circle cx="165" cy="150" r="74" fill="#c8211d"/>
+            <g fill="none" stroke="#fbe7b8" stroke-width="1.2" opacity=".75">
+              <path d="M20 280 C 80 240, 120 300, 170 250 S 260 210, 312 236"/>
+              <path d="M20 300 C 90 270, 140 320, 190 275 S 270 250, 312 262" opacity=".6"/>
+            </g>
+            <g fill="#fbe7b8"><circle cx="60" cy="262" r="3.5"/><circle cx="118" cy="283" r="3.5"/><circle cx="170" cy="250" r="3.5"/><circle cx="232" cy="228" r="3.5"/><circle cx="290" cy="232" r="3.5"/></g>
+            <text x="165" y="168" text-anchor="middle" font-family="Georgia, serif" font-size="54" fill="#fbe7b8" letter-spacing="2">GCI</text>
+            <text x="165" y="338" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" fill="#fbe7b8" letter-spacing="3">WORLD · 2026</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>University of Tokyo • GCI World 2026</h3>
+          <p>Data science and AI programme with the Matsuo-Iwasawa Lab, supported by JICA.</p>
+          <div class="tags"><span class="tag">Applied data analysis</span><span class="tag">Competition</span><span class="tag">Capstone</span></div>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card" style="--r:2.5deg">
+        <div class="card-media">
+          <svg viewBox="0 0 330 363" role="img" aria-label="Padlock illustration">
+            <rect width="330" height="363" fill="#0b0b0b"/>
+            <rect x="70" y="50" width="190" height="210" fill="#161616" stroke="#e8e2d0" stroke-width="1.5" stroke-dasharray="1.5 3"/>
+            <path d="M130 140 v-28 a35 35 0 0 1 70 0 v28" fill="none" stroke="#d8d2c2" stroke-width="12" stroke-linecap="round"/>
+            <rect x="112" y="138" width="106" height="92" rx="10" fill="#efe7d6" stroke="#9e3a3f" stroke-width="3"/>
+            <circle cx="165" cy="175" r="11" fill="#9e3a3f"/><rect x="161" y="178" width="8" height="26" rx="3" fill="#9e3a3f"/>
+            <text x="165" y="310" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="15" fill="#3fd07a">$ sudo learn --daily</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <h3>Security • Systems</h3>
+          <p>Preparing for CompTIA Security+ with hands-on labs on TryHackMe, all on Linux &amp; Bash.</p>
+          <div class="tags"><span class="tag">Security+</span><span class="tag">TryHackMe</span><span class="tag">Linux</span></div>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card" style="--r:-2deg">
+        <div class="card-media"><img src="assets/friends.jpg" alt="Kamran taking a selfie with friends on a forest trail" style="object-position:50% 40%"></div>
+        <div class="card-body">
+          <h3>Off the clock • Team player</h3>
+          <p>Forest trails with friends: the same teamwork I bring to every group project.</p>
+          <div class="tags"><span class="tag">Bangla (native)</span><span class="tag">English (fluent)</span></div>
+        </div>
+      </article>
+
+      <!-- invite -->
+      <article class="card invite" style="--r:-3deg">
+        <div class="inner">
+          <h3>You're invited</h3>
+          <div class="sub">… to be next.</div>
+          <p>And if the project you're envisioning isn't quite reflected here? 0 problem. I like to step outside my comfort zone—because that's often where the real learning happens. Whether it's data analytics, a website or digital product work, we're probably a good fit. Only one way to find out…</p>
+          <div class="cta"><a class="btn" href="#contact">Let's chat</a></div>
+        </div>
+        <div class="reserve">[Space reserved for your project]</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="after" id="about">
+    <div class="wood">
+      <div class="stadium">
+        <div class="avatar"><img id="avatar" src="assets/portrait.jpg" alt="Portrait of Kamran"></div>
+        <button class="pn prev" id="prev" aria-label="Previous">PREV</button>
+        <div class="quote" id="slides">
+          <div class="slide on" data-img="assets/portrait.jpg">
+            "I'm a Computer Science undergraduate at BRAC University, in my final-year capstone project. I like building real things — a company's first website, a model that finds patterns in 50,000 records, a system that senses the world through Wi-Fi. I'm keen to contribute to data analytics, digital product development and partnerships."
+            <div class="who">Kamrul Islam Kamran, <em>Dhaka</em>, Bangladesh</div>
+          </div>
+          <div class="slide" data-img="assets/casual.jpg">
+            "BRAC University — B.Sc. in Computer Science, 2022 – Dec 2027 (expected). Coursework in Artificial Intelligence (CSE422), Operating Systems (CSE321) and Machine Learning. Plus the University of Tokyo's GCI World 2026 programme: Python, machine learning and applied data analysis for business."
+            <div class="who">Education, <em>BRAC University</em> &amp; <em>University of Tokyo</em></div>
+          </div>
+          <div class="slide" data-img="assets/formal.jpg">
+            "As Head of IT at Royal Asia Trade Line, I created the company's first online presence so prospective clients could review the business. Clients since include partners in Europe and Malaysia. I'm the sole IT staff member: systems, devices, user support, partner correspondence and business documents."
+            <div class="who">Head of IT, <em>Royal Asia Trade Line</em>, 2026 – Present</div>
+          </div>
+          <div class="slide" data-img="assets/night.jpg" id="skills-tab">
+            "Data &amp; AI: Python, Jupyter, data cleaning, EDA, tree-based classification. Web: design and deployment on Vercel. Business tools: HubSpot CRM, Zoho CRM. Security: CompTIA Security+ (in prep), TryHackMe. Systems: Linux, Bash, VS Code, Git/GitHub."
+            <div class="who">Skills, <em>the toolkit</em></div>
+          </div>
+          <div class="slide" data-img="assets/trail.jpg">
+            "I speak Bangla natively and English fluently, and I spend a lot of my time translating and drafting replies to overseas partners. Whether it's a client in Europe or a teammate on the trail, I care about clear communication."
+            <div class="who">Languages, <em>Bangla</em> &amp; <em>English</em></div>
+          </div>
+        </div>
+        <button class="pn next" id="next" aria-label="Next">NEXT</button>
+        <div class="tabs" id="tabs">
+          <button class="on">S</button><button>T</button><button>A</button><button>R</button><button>T</button>
+        </div>
+      </div>
+    </div>
+
+    <form class="paper" id="contact" autocomplete="on">
+      <label for="msg">Briefly tell me about your project or opportunity. I don't bite (promise 😄). You'll hear from me within 24 hours.</label>
+      <textarea id="msg" name="msg" required></textarea>
+
+      <div class="budget-q">What's it about?</div>
+      <div class="budget" id="topic">
+        <button type="button">Internship</button>
+        <button type="button">Website</button>
+        <button type="button">Data / AI</button>
+        <button type="button">Just say hi</button>
+      </div>
+
+      <div class="field"><input name="name" placeholder="Your name" required></div>
+      <div class="field"><input name="email" type="email" placeholder="Email address" required></div>
+
+      <div class="sender"><img src="assets/portrait.jpg" alt=""></div>
+      <div class="send"><button class="btn" type="submit">Send</button></div>
+      <div class="sent" id="sent">Opening your email app… thanks for reaching out!</div>
+    </form>
+
+    <footer>
+      <nav class="nav" aria-label="Footer">
+        <a href="#top">Home</a>
+        <a href="#about">About</a>
+        <a href="#work">Experience</a>
+        <a href="#work">Projects</a>
+        <a href="#top" class="active">Portfolio</a>
+        <a href="#skills-tab" data-go="3">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="legal">
+        <span>2026 Kamrul Islam Kamran</span>
+        <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:kamrulislamkmran@gmail.com">kamrulislamkmran@gmail.com</a>
+      </div>
+    </footer>
+  </section>
+</main>
+
+<a href="#top" class="olive" aria-label="Back to top">
+  <svg viewBox="0 0 40 48">
+    <defs><radialGradient id="ol" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#c9b54a"/><stop offset=".6" stop-color="#7d7a1f"/><stop offset="1" stop-color="#3f3d0c"/></radialGradient></defs>
+    <ellipse cx="20" cy="26" rx="17" ry="21" fill="url(#ol)"/>
+    <ellipse cx="18" cy="9" rx="6" ry="4" fill="#c4262b"/>
+    <ellipse cx="13" cy="20" rx="3" ry="5" fill="#fff" opacity=".35"/>
+  </svg>
+</a>
+
+<script>
+  // ticker
+  const phrases = ["Data + AI, built with curiosity","Build your online presence with Kamran","Computer Science @ BRAC University","GCI World 2026 — University of Tokyo","Your story, told through data"];
+  const icons = [
+    '<svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3" transform="rotate(20 12 12)" fill="#b86b4b"/><circle cx="12" cy="12" r="2.6" fill="#141210"/></svg>',
+    '<svg viewBox="0 0 24 24"><path d="M4 12 L12 4 L20 12 L12 20Z" fill="#c9765a"/><path d="M9 10 l3 3 l4-5" stroke="#fbfbd2" stroke-width="1.8" fill="none"/></svg>',
+    '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="7" ry="10" transform="rotate(-15 12 12)" fill="#d9a07f"/><ellipse cx="10" cy="9" rx="2" ry="3" fill="#fff" opacity=".5"/></svg>'
+  ];
+  const track = document.getElementById('ticker');
+  let html = '';
+  for (let i = 0; i < phrases.length; i++) html += `<div class="ticker-item"><span>${phrases[i]}</span>${icons[i % icons.length]}</div>`;
+  track.innerHTML = html + html;
+
+  // about carousel
+  const slides = [...document.querySelectorAll('.slide')];
+  const tabs = [...document.querySelectorAll('#tabs button')];
+  const avatar = document.getElementById('avatar');
+  let cur = 0;
+  function go(i){
+    cur = (i + slides.length) % slides.length;
+    slides.forEach((s, k) => { s.classList.toggle("on", k === cur); s.classList.toggle("fx", k === cur); });
+    tabs.forEach((t, k) => t.classList.toggle('on', k === cur));
+    avatar.src = slides[cur].dataset.img;
+  }
+  document.getElementById('prev').onclick = () => go(cur - 1);
+  document.getElementById('next').onclick = () => go(cur + 1);
+  tabs.forEach((t, k) => t.onclick = () => go(k));
+  document.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); go(+a.dataset.go);
+    document.getElementById('about').scrollIntoView({behavior:'smooth'});
+  }));
+
+  // contact form -> mailto
+  let topic = '';
+  document.querySelectorAll('#topic button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#topic button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on'); topic = b.textContent;
+  });
+  document.getElementById('contact').addEventListener('submit', e => {
+    e.preventDefault();
+    const f = e.target;
+    const subject = `Portfolio enquiry${topic ? ' — ' + topic : ''} from ${f.name.value}`;
+    const body = `${f.msg.value}\n\n${f.name.value}\n${f.email.value}`;
+    location.href = `mailto:kamrulislamkmran@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    document.getElementById('sent').style.display = 'block';
+  });
+</script>
+</body>
+</html>
